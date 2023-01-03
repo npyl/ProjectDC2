@@ -1,0 +1,11 @@
+% 1. ylopoiisi tou M-PAM systymatos ths ekfwnisis
+
+M = [4, 8];
+
+% dyadiki akolouthia
+bits = randsrc(10^4, 1, [0, 1]);
+
+% s(m)
+
+
+s = mapper(bits, 2);
