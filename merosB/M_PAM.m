@@ -1,3 +1,6 @@
+%
+%   M-PAM Modulation
+%
 function S_t = M_PAM(symbols, M)
     Tsymbol = 40;
 
