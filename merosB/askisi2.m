@@ -57,3 +57,57 @@ hold on;
 xlabel('SNR/bit (db)');
 ylabel('BER');
 legend('4-PAM no gray', '8-PAM with gray');
+title('Erwtimata 2) kai 4)');
+
+% 5)
+
+M = 4;
+
+S_m = mapper(bits, M, 1);
+S_t = M_PAM(S_m, M);
+
+i = 1;
+
+for snr = 0:2:20
+    S_final = S_t + awgn_noise(snr, M, size(S_t));
+    
+    % ---- DEKTIS ----
+    r               = de_M_PAM(S_final);    % apodiamorfwsi
+    new_S_m         = foratis(r, M);        % symbola pou dexetai o dektis
+    new_bits        = demapper(new_S_m, M, 1);
+
+    ser_4nogray(i)  = ser(bits(1:length(new_bits)), new_bits);
+    i = i + 1;
+end
+
+M = 8;
+
+S_m = mapper(bits, M, 1);
+S_t = M_PAM(S_m, M);
+
+i = 1;
+
+for snr = 0:2:20
+    S_final = S_t + awgn_noise(snr, M, size(S_t));
+    
+    % ---- DEKTIS ----
+    r               = de_M_PAM(S_final);    % apodiamorfwsi
+    new_S_m         = foratis(r, M);        % symbola pou dexetai o dektis
+    new_bits        = demapper(new_S_m, M, 1);
+
+    ser_8nogray(i)  = ser(bits(1:length(new_bits)), new_bits);
+    i = i + 1;
+end
+
+SNR = 0:2:20;
+
+% SER
+figure(2);
+semilogy(SNR, ser_4nogray, 'b');
+hold on;
+semilogy(SNR, ser_8nogray, 'g');
+hold on;
+xlabel('SNR/bit (db)');
+ylabel('SER');
+legend('4-PAM no gray', '8-PAM no gray');
+title('Erwtima 5)');
