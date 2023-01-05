@@ -10,5 +10,5 @@ S_m = mapper(bits, M);
 S_t = M_PAM(S_m, M);
 
 for snr = 0:2:20
-    S_final = S_t + noise(snr, M, Lb, size(S_t));
+    S_final = S_t + awgn_noise(snr, M, size(S_t));
 end
