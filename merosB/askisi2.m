@@ -58,6 +58,7 @@ xlabel('SNR/bit (db)');
 ylabel('BER');
 legend('4-PAM no gray', '8-PAM with gray');
 title('Erwtimata 2) kai 4)');
+hold off;
 
 % 5)
 
@@ -111,3 +112,4 @@ xlabel('SNR/bit (db)');
 ylabel('SER');
 legend('4-PAM no gray', '8-PAM no gray');
 title('Erwtima 5)');
+hold off;

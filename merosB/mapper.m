@@ -7,7 +7,7 @@ function s = mapper(bits, M, gray)
     bits_reshape = reshape(a, step, b)';
     s = bin2dec(num2str(bits_reshape));
 
-    if (gray)
+    if (gray == 1)
         s = bin2gray(s, 'pam', M);
     end
 end
