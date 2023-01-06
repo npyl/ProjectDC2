@@ -13,28 +13,63 @@ y1 = filter(b, a, x);
 a = [1 -a2]';
 y2 = filter(b, a, x);
 
-% TODO: add ADM
-
 % PCM bits
 N = [2, 4, 8];
 
+color = ['r', 'g', 'b'];
+
 % ta PCM gia tin AR1
+figure(1);
+
+% gia kathe N ftiaxnw kampyli sto figure
 for i=1:3
     sqnr = zeros(length(N), 1);
-    Lloyd_Max_output = zeros(length(N), length(y1));
+    output = zeros(length(N), length(y1));
 
-    [xq_Lloyd_Max, centers, D] = Lloyd_Max(y1, N(i), min(y1), max(y1));
-    Lloyd_Max_output(i,:) = centers(xq_Lloyd_Max);
-    sqnr(i) = mean(y1.^2) / mean((y1' - Lloyd_Max_output(i,:)).^2);
+    [xq, centers, D] = Lloyd_Max(y1, N(i), min(y1), max(y1));
+    output(i, :) = centers(xq);
 
-    figure
-    hold on
-    title(sprintf('Lloyd_Max for N=%d', N(i)))
-    plot(Lloyd_Max_output(i,:))
-    hold off
+    % SQNR (dB) ana j-osti epanalipsi
+    for j = 1:length(D)
+        sqnr(j) = 10 * log10(mean(y1.^2) / D(j));
+    end
+
+    plot(1:length(D), sqnr, color(i));
+    hold on;
 end
+
+ylabel('SQNR (dB)');
+xlabel('epanalipsi');
+legend('2-PAM', '4-PAM', '8-PAM');
+title('AR1(1)');
+hold off;
 
 % ta PCM gia tin AR2
+figure(2);
+
+% gia kathe N ftiaxnw kampyli sto figure
 for i=1:3
-    
+    sqnr = zeros(length(N), 1);
+    output = zeros(length(N), length(y2));
+
+    [xq, centers, D] = Lloyd_Max(y2, N(i), min(y2), max(y2));
+    output(i, :) = centers(xq);
+
+    % SQNR (dB) ana j-osti epanalipsi
+    for j = 1:length(D)
+        sqnr(j) = 10 * log10(mean(y2.^2) / D(j));
+    end
+
+    plot(1:length(D), sqnr, color(i));
+    hold on;
 end
+
+ylabel('SQNR (dB)');
+xlabel('epanalipsi');
+legend('2-PAM', '4-PAM', '8-PAM');
+title('AR2(1)');
+hold off;
+
+% ADM
+A2 = interp(x, 2);
+A2q = ADM(A2);
