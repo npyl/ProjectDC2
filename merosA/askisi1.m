@@ -44,8 +44,22 @@ legend('2-PAM', '4-PAM', '8-PAM');
 title('AR1(1)');
 hold off;
 
-% ta PCM gia tin AR2
+% erwtima b) grafiki gia ta outputs
 figure(2);
+plot(1:length(output(1,:)), output(1,:), color(1));
+hold on;
+plot(1:length(output(2,:)), output(2,:), color(2));
+hold on;
+plot(1:length(output(3,:)), output(3,:), color(3));
+hold on;
+ylabel('output');
+xlabel('epanalipsi');
+legend('2-PAM', '4-PAM', '8-PAM');
+title('outputs AR1(1)');
+hold off;
+
+% ta PCM gia tin AR2
+figure(3);
 
 % gia kathe N ftiaxnw kampyli sto figure
 for i=1:3
@@ -68,6 +82,20 @@ ylabel('SQNR (dB)');
 xlabel('epanalipsi');
 legend('2-PAM', '4-PAM', '8-PAM');
 title('AR2(1)');
+hold off;
+
+% erwtima b) grafiki gia ta outputs
+figure(4);
+plot(1:length(output(1,:)), output(1,:), color(1));
+hold on;
+plot(1:length(output(2,:)), output(2,:), color(2));
+hold on;
+plot(1:length(output(3,:)), output(3,:), color(3));
+hold on;
+ylabel('output');
+xlabel('epanalipsi');
+legend('2-PAM', '4-PAM', '8-PAM');
+title('outputs AR2(1)');
 hold off;
 
 % ADM
