@@ -1,5 +1,4 @@
-function [xq,centers,D] = Lloyd_Max(x,N,min_value,max_value)
-%N - bits κωδικοποίησης 
+function [xq,centers,D] = Lloyd_Max(x, N, min_value, max_value)
 x(x>max_value) = max_value;
 x(x<min_value) = min_value;
  
@@ -55,7 +54,7 @@ while(k<Kmax)
     for i=1:points
         if (sum(xq==i))
             centers(i)=centers(i)/sum(xq==i);
-        end;   
+        end;
     end;
     
     D(k) = (1/n)*sum((x-centers(xq)).^2);

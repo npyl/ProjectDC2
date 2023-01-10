@@ -1,4 +1,4 @@
-L = 5;
+L = 100;
 x = randn(L, 1);
 
 a1 = 0.9;
@@ -22,12 +22,16 @@ color = ['r', 'g', 'b'];
 figure(1);
 
 % gia kathe N ftiaxnw kampyli sto figure
-for i=1:3
+for i=1:length(N)
     sqnr = zeros(length(N), 1);
     output = zeros(length(N), length(y1));
 
     [xq, centers, D] = Lloyd_Max(y1, N(i), min(y1), max(y1));
     output(i, :) = centers(xq);
+
+    % get probabilities & calculate entropy
+    prob = probabilities(output(i, :));
+    H(i) = entropy(prob);
 
     % SQNR (dB) ana j-osti epanalipsi
     for j = 1:length(D)
@@ -62,12 +66,16 @@ hold off;
 figure(3);
 
 % gia kathe N ftiaxnw kampyli sto figure
-for i=1:3
+for i=1:length(N)
     sqnr = zeros(length(N), 1);
     output = zeros(length(N), length(y2));
 
     [xq, centers, D] = Lloyd_Max(y2, N(i), min(y2), max(y2));
     output(i, :) = centers(xq);
+
+    % get probabilities & calculate entropy
+    prob2 = probabilities(output(i, :));
+    H(i) = entropy(prob);
 
     % SQNR (dB) ana j-osti epanalipsi
     for j = 1:length(D)
