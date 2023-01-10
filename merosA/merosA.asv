@@ -115,7 +115,7 @@ A = interp(x, 2);
 x_ADM = ADM(A);
 
 % ----------------------------------
-%   erwtima 2) 2-PCM, 4
+%   erwtima 2) 2-PCM, 4-PCM gia to cameraman.mat
 % ----------------------------------
 
 N = [2, 4];
@@ -124,25 +124,33 @@ load cameraman.mat
 x = i(:);
 x = (x - 128) / 128;    % x range from [0:255] to [-1:1]
 
+function show_
+
 figure(5);
 
 % gia kathe N ftiaxnw kampyli sto figure
-for i=1:length(N)
+for i = 1:length(N)
     sqnr = zeros(length(N), 1);
-    output = zeros(length(N), length(y1));
+    output = zeros(length(N), length(x));
 
-    [xq, centers, D] = Lloyd_Max(y1, N(i), min(y1), max(y1));
+    [xq, centers, D] = Lloyd_Max(x, N(i), min(x), max(x));
     output(i, :) = centers(xq);
 
-    % erwtima 1.2) get probabilities & calculate entropy
+    % erwtima 2.2) get probabilities & calculate entropy
     prob = probabilities(output(i, :));
     H(i) = entropy(prob);
 
     % erwtima 1.1a) SQNR (dB) ana j-osti epanalipsi
     for j = 1:length(D)
-        sqnr(j) = 10 * log10(mean(y1.^2) / D(j));
+        sqnr(j) = 10 * log10(mean(x.^2) / D(j));
     end
 
     plot(1:length(D), sqnr, color(i));
     hold on;
 end
+
+ylabel('SQNR (dB)');
+xlabel('epanalipsi');
+legend('2-PAM', '4-PAM');
+title('PCM gia cameraman.mat');
+hold off;

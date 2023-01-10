@@ -22,13 +22,14 @@ color = ['r', 'g', 'b'];
 %   Erwtima 1)
 % --------------------------------
 
+output = zeros(length(N), length(y1));
+
 % ta PCM gia tin AR1(1)
 figure(1);
 
 % gia kathe N ftiaxnw kampyli sto figure
 for i=1:length(N)
     sqnr = zeros(length(N), 1);
-    output = zeros(length(N), length(y1));
 
     [xq, centers, D] = Lloyd_Max(y1, N(i), min(y1), max(y1));
     output(i, :) = centers(xq);
@@ -69,10 +70,11 @@ hold off;
 % ta PCM gia tin AR2(1)
 figure(3);
 
+output = zeros(length(N), length(y2));
+
 % gia kathe N ftiaxnw kampyli sto figure
 for i=1:length(N)
     sqnr = zeros(length(N), 1);
-    output = zeros(length(N), length(y2));
 
     [xq, centers, D] = Lloyd_Max(y2, N(i), min(y2), max(y2));
     output(i, :) = centers(xq);
@@ -126,10 +128,11 @@ x = (x - 128) / 128;    % x range from [0:255] to [-1:1]
 
 figure(5);
 
+output = zeros(length(N), length(x));
+
 % gia kathe N ftiaxnw kampyli sto figure
 for i = 1:length(N)
     sqnr = zeros(length(N), 1);
-    output = zeros(length(N), length(x));
 
     [xq, centers, D] = Lloyd_Max(x, N(i), min(x), max(x));
     output(i, :) = centers(xq);
@@ -138,7 +141,7 @@ for i = 1:length(N)
     prob = probabilities(output(i, :));
     H(i) = entropy(prob);
 
-    % erwtima 1.1a) SQNR (dB) ana j-osti epanalipsi
+    % erwtima 2.1a) SQNR (dB) ana j-osti epanalipsi
     for j = 1:length(D)
         sqnr(j) = 10 * log10(mean(x.^2) / D(j));
     end
@@ -152,3 +155,9 @@ xlabel('epanalipsi');
 legend('2-PAM', '4-PAM');
 title('PCM gia cameraman.mat');
 hold off;
+
+% erwtima 2.1b) deixnw tis eikones meta tin epeksergasia
+figure;
+show_image(output(1, :));
+figure;
+show_image(output(2, :));
