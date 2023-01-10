@@ -157,7 +157,9 @@ title('PCM gia cameraman.mat');
 hold off;
 
 % erwtima 2.1b) deixnw tis eikones meta tin epeksergasia
-figure;
+figure(6);
 show_image(output(1, :));
-figure;
+title('2-bit cameraman');
+figure(7);
 show_image(output(2, :));
+title('4-bit cameraman');
